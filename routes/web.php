@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CountryController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminCountryController;
+use App\Http\Controllers\Admin\AdminGenreController;
+use App\Http\Controllers\Admin\AdminMovieController;
 use App\Http\Controllers\EpisodeController;
-use App\Http\Controllers\GenreController;
 use App\Http\Controllers\GoogleAuthController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\MovieController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,17 +33,15 @@ Route::get('/danh-muc/{slug}', [IndexController::class, 'category'])->name('cate
 Route::get('/the-loai/{slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('country');
 Route::get('/phim/{slug}', [IndexController::class, 'movie'])->name('movie');
-Route::get('/xem-phim', [IndexController::class, 'watch'])->name('watch');
+Route::get('/xem-phim/{slug}', [IndexController::class, 'watch'])->name('watch');
 Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
 Auth::routes([
     'verify' => true
 ]);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth', 'verified', 'role:admin');
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::resource('category', CategoryController::class);
-Route::post('category/resorting', [CategoryController::class, 'resorting'])->name('resorting');
-Route::resource('genre', GenreController::class);
-Route::resource('country', CountryController::class);
+Route::get('/admin', [HomeController::class, 'index'])->name('home')->middleware('auth', 'verified', 'role:admin');
+Route::resource('admin/category', AdminCategoryController::class)->middleware('auth', 'verified', 'role:admin');
+Route::resource('admin/country', AdminCountryController::class)->middleware('auth', 'verified', 'role:admin');
+Route::resource('admin/genre', AdminGenreController::class)->middleware('auth', 'verified', 'role:admin');
+Route::resource('admin/movie', AdminMovieController::class)->middleware('auth', 'verified', 'role:admin');
+// Route::get('/admin', [HomeController::class, 'index'])->name('home');
 Route::resource('episode', EpisodeController::class);
-Route::resource('movie', MovieController::class);

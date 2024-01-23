@@ -12,49 +12,39 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $category = Category::orderBy('id', 'desc')->where('status', 1)->get();
-        $genre = Genre::orderBy('id', 'desc')->get();
-        $country = Country::orderBy('id', 'desc')->get();
+
         $category_home = Category::with('movie')->orderBy('id', 'desc')->where('status', 1)->get();
-
-
-        return view('pages.home', compact('category', 'genre', 'country', 'category_home'));
+        return view('pages.home', compact('category_home'));
     }
     public function category($slug)
     {
-        $category = Category::orderBy('id', 'desc')->where('status', 1)->get();
-        $genre = Genre::orderBy('id', 'desc')->get();
-        $country = Country::orderBy('id', 'desc')->get();
+
         $cate_slug = Category::where('slug', $slug)->first();
-        return view('pages.category', compact('category', 'genre', 'country', 'cate_slug'));
+        return view('pages.category', compact('cate_slug'));
     }
     public function genre($slug)
     {
-        $category = Category::orderBy('id', 'desc')->where('status', 1)->get();
-        $genre = Genre::orderBy('id', 'desc')->get();
-        $country = Country::orderBy('id', 'desc')->get();
+
         $genre_slug = Genre::where('slug', $slug)->first();
-        return view('pages.genre', compact('category', 'genre', 'country', 'genre_slug'));
+
+        return view('pages.genre', compact('genre_slug'));
     }
     public function country($slug)
     {
-        $category = Category::orderBy('id', 'desc')->where('status', 1)->get();
-        $genre = Genre::orderBy('id', 'desc')->get();
-        $country = Country::orderBy('id', 'desc')->get();
+
         $country_slug = Country::where('slug', $slug)->first();
-        return view('pages.country', compact('category', 'genre', 'country', 'country_slug'));
+        return view('pages.country', compact('country_slug'));
     }
     public function movie($slug)
     {
-        $category = Category::orderBy('id', 'desc')->where('status', 1)->get();
-        $genre = Genre::orderBy('id', 'desc')->get();
-        $country = Country::orderBy('id', 'desc')->get();
+
         $movie = Movie::where('slug', $slug)->first();
-        return view('pages.movie', compact('category', 'genre', 'country', 'movie'));
+        return view('pages.movie', compact('movie'));
     }
-    public function watch()
+    public function watch($slug)
     {
-        return view('pages.watch');
+        $movie = Movie::where('slug', $slug)->first();
+        return view('pages.watch', compact('movie'));
     }
     public function episode()
     {

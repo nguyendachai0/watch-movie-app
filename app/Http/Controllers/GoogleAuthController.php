@@ -17,10 +17,7 @@ class GoogleAuthController extends Controller
     {
         try {
             $google_user = Socialite::driver('google')->user();
-
             $user = User::where('google_id', $google_user->getId())->first();
-
-
             if (!$user) {
                 $new_user = User::create([
                     'name' => $google_user->getName(),
@@ -28,9 +25,7 @@ class GoogleAuthController extends Controller
                     'google_id' => $google_user->getId(),
                     'email_verified_at' => now(),
                 ]);
-
                 Auth::login($new_user);
-
                 return redirect()->intended('home');
             } else {
                 Auth::login($user);
