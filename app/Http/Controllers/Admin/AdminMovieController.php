@@ -44,6 +44,7 @@ class AdminMovieController extends Controller
         $movie->slug = $data['slug'];
         $movie->status = $data['status'];
         $movie->link_stream = $data['link_stream'];
+        $movie->link_trailer = $data['link_trailer'];
         $movie->category_id = $data['category_id'];
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
@@ -93,6 +94,7 @@ class AdminMovieController extends Controller
         $movie->slug = $data['slug'];
         $movie->status = $data['status'];
         $movie->link_stream = $data['link_stream'];
+        $movie->link_trailer = $data['link_trailer'];
         $movie->category_id = $data['category_id'];
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];

@@ -25,9 +25,31 @@
       <meta property="og:image" content="" />
       <meta property="og:image:width" content="300" />
       <meta property="og:image:height" content="55" />
-      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-     
-      <link rel='dns-prefetch' href='//s.w.org' />
+      <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+
+      <!-- ::::::::::::::All CSS Files here :::::::::::::: -->
+      <!-- Vendor CSS -->
+      <!-- <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css">
+      <link rel="stylesheet" href="assets/css/vendor/ionicons.css">
+      <link rel="stylesheet" href="assets/css/vendor/simple-line-icons.css">
+      <link rel="stylesheet" href="assets/css/vendor/jquery-ui.min.css"> -->
+  
+      <!-- Plugin CSS -->
+      <!-- <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
+      <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
+      <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
+      <link rel="stylesheet" href="assets/css/plugins/venobox.min.css">
+      <link rel="stylesheet" href="assets/css/plugins/jquery.lineProgressbar.css">
+      <link rel="stylesheet" href="assets/css/plugins/aos.min.css"> -->
+  
+      <!-- Main CSS -->
+      <!-- <link rel="stylesheet" href="assets/sass/style.css"> -->
+  
+      <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+      <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
+      <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
+      <link rel="stylesheet" href="assets/css/style.min.css">
+        <link rel='dns-prefetch' href='//s.w.org' />
       
       <link rel='stylesheet' id='bootstrap-css' href='{{asset('css/bootstrap.min.css?ver=5.7.2')}}' media='all' />
     

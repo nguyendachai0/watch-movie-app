@@ -27,10 +27,11 @@ class AppServiceProvider extends ServiceProvider
             $categories = Category::orderBy('id', 'desc')->where('status', 1)->get();
             $genres = Genre::orderBy('id', 'desc')->get();
             $countries = Country::orderBy('id', 'desc')->get();
-
+            $chunkedGenres  = array_chunk($genres->toArray(), 3);
             $view->with('categories', $categories)
                 ->with('genres', $genres)
-                ->with('countries', $countries);
+                ->with('countries', $countries)
+                ->with('chunkedGenres', $chunkedGenres);
         });
     }
 }

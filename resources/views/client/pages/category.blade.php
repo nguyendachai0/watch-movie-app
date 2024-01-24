@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('client.layout')
 @section('content')
 <div class="row container" id="wrapper">
     <div class="halim-panel-filter">

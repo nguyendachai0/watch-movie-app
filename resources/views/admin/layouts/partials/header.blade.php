@@ -772,20 +772,25 @@
             <div class="deznav-scroll">
     
                 <ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" href="<%= locals.base_url%>admin/category" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" href="{{route('category.index')}}" aria-expanded="false">
                             <i class="flaticon-144-layout"></i>
                             <span class="nav-text">Category</span>
                         </a>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="<%= locals.base_url%>admin/product" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" href="{{route('country.index')}}" aria-expanded="false">
                             <i class="flaticon-077-menu-1"></i>
-                            <span class="nav-text">Product</span>
+                            <span class="nav-text">Country</span>
                         </a>
     
                     </li>
-                    <li><a class="has-arrow ai-icon" href="<%= locals.base_url%>admin/order" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" href="{{route('genre.index')}}" aria-expanded="false">
                             <i class="flaticon-044-file"></i>
-                            <span class="nav-text">Orders</span>
+                            <span class="nav-text">Genre</span>
+                        </a>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="{{route('movie.index')}}" aria-expanded="false">
+                            <i class="flaticon-044-file"></i>
+                            <span class="nav-text">Movie</span>
                         </a>
                     </li>
             </div>

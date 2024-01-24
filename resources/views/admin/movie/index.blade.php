@@ -68,8 +68,20 @@
                                                             <div class="col-lg-6">
                                                                 <input type="text" class="form-control"
                                                                     id="val-description" name="link_stream"
-                                                                    placeholder="Enter Description"
-                                                                    value="{{ isset($movieToEdit) ? $movieToEdit->description : ''}}">
+                                                                    placeholder="Enter link to watch"
+                                                                    value="{{ isset($movieToEdit) ? $movieToEdit->link_stream : ''}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-4 col-form-label"
+                                                                for="val-description">Link Trailer<span
+                                                                    class="text-danger">*</span>
+                                                            </label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" class="form-control"
+                                                                    id="val-description" name="link_trailer"
+                                                                    placeholder="Enter link for trailer"
+                                                                    value="{{ isset($movieToEdit) ? $movieToEdit->link_trailer : ''}}">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
