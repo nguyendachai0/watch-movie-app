@@ -13,7 +13,8 @@ class IndexController extends Controller
     public function index()
     {
         $category_home = Category::with('movie')->orderBy('id', 'desc')->where('status', 1)->get();
-        return view('client.pages.home', compact('category_home'));
+        $popularMovies = Movie::orderBy('id', 'desc')->where('status', 2)->get();
+        return view('client.pages.home', compact('category_home', 'popularMovies'));
     }
     public function category($slug)
     {

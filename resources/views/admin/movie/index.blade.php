@@ -93,6 +93,7 @@
                                                             <select class="form-select" aria-label="Default select example" name="status">
                                                                 <option {{ isset($movieToEdit) && $movieToEdit->status == 1 ? 'selected' : ''}} value="1">Active</option>
                                                                 <option {{ isset($movieToEdit) && $movieToEdit->status == 0 ? 'selected' : ''}} value="0">Inactive</option>
+                                                                <option {{ isset($movieToEdit) && $movieToEdit->status == 2 ? 'selected' : ''}} value="2">Active & Popular</option>
                                                               </select>
                                                             </div>
                                                         </div>
