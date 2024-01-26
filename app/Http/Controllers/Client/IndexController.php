@@ -63,9 +63,24 @@ class IndexController extends Controller
         $castList = Cast::whereIn('name', $castListName)->get();
         return view('client.pages.watch-trailer', compact('movie', 'castList'));
     }
-    public function filterMovie()
+    public function filterMovie(Request $request)
     {
-        $movieFilterList = Movie::all();
+        $countryId = $request->input('country_id');
+        $genreId = $request->input('genre_id');
+        $categoryId = $request->input('category_id');
+        $query = Movie::query();
+        if ($countryId) {
+            $query->where('country_id', $countryId);
+        }
+
+        if ($genreId) {
+            $query->where('genre_id', $genreId);
+        }
+
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+        $movieFilterList = $query->get();
         return view('client.pages.filter', compact('movieFilterList'));
     }
     public function episode()

@@ -203,6 +203,40 @@ font-size: 1.1rem;
     border: 1px solid hsl(200 100% 99% / 5%);
     margin-bottom: 2rem;
 }
+.heading form {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    grid-template-columns: 0.6fr 1fr 1fr 1fr 1fr;
+}
+.heading form select {
+    text-align: center;
+}
+.heading  select {
+    appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: linear-gradient(to right, #007bff, #6a0dad, #ff4646);
+  font-weight:500;
+    padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+.heading button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .heading button:hover {
+    background-color: #0056b3;
+  }
 .heading-title {
     font-size: 1.2rem;
     font-weight: 500;

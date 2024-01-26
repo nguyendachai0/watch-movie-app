@@ -35,7 +35,7 @@ Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('count
 Route::get('/phim/{slug}', [IndexController::class, 'movie'])->name('movie');
 Route::get('/xem-phim/{slug}', [IndexController::class, 'watch'])->name('watch');
 Route::get('/xem-trailer/{slug}', [IndexController::class, 'watchTrailer'])->name('watchTrailer');
-Route::get('/loc-phim/', [IndexController::class, 'filterMovie'])->name('filterMovie');
+Route::get('/loc-phim', [IndexController::class, 'filterMovie'])->name('filterMovie');
 Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
 Auth::routes([
     'verify' => true
