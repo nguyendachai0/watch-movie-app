@@ -62,6 +62,18 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-lg-4 col-form-label"
+                                                                for="val-description">Actor<span
+                                                                    class="text-danger">*</span>
+                                                            </label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" class="form-control"
+                                                                    id="val-description" name="actor"
+                                                                    placeholder="Enter List of actor"
+                                                                    value="{{ isset($movieToEdit) ? $movieToEdit->actor : ''}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-4 col-form-label"
                                                                 for="val-description">Link Stream<span
                                                                     class="text-danger">*</span>
                                                             </label>
@@ -145,6 +157,15 @@
                                                                     <input class="form-control" type="file" id="formFile" name="image">
                                                             </div>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-4 col-form-label"
+                                                                for="val-description">Choose Poster<span
+                                                                    class="text-danger">*</span>
+                                                            </label>
+                                                            <div class="col-lg-6">
+                                                                    <input class="form-control" type="file" id="formFile" name="poster">
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                     <div class="col-lg-8 ml-auto">
@@ -173,7 +194,9 @@
                                         <th style="width:80px;"><strong>#</strong></th>
                                         <th><strong>TITLE</strong></th>
                                         <th><strong>IMAGE</strong></th>
+                                        <th><strong>POSTER</strong></th>
                                         <th><strong>DESCRIPTION</strong></th>
+                                        <th><strong>Actor list</strong></th>
                                         <th><strong>STATUS</strong></th>
                                         <th><strong>CATEGORY</strong></th>
                                         <th><strong>COUNTRY</strong></th>
@@ -193,9 +216,14 @@
                                             <td>
                                                 <img src="{{asset('uploads/movie/'.$movie->image)}}" width="100">
                                             </td>
-                                         
+                                            <td>
+                                                <img src="{{asset('uploads/movie/poster/'.$movie->poster)}}" width="100">
+                                            </td>                                 
                                             <td>
                                                 {{$movie->description}}
+                                            </td>
+                                            <td>
+                                                {{$movie->actor}}
                                             </td>
                                             <td>
                                                 {{($movie->status == 1) ? 'Active' : 'Inactive'}}

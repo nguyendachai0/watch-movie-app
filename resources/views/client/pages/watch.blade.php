@@ -1,7 +1,7 @@
 @extends('client.layouts.layout')
 @section('content')
 <div class="play-container container">
-   <img src="{{asset('uploads/movie/aquaman-movie-banner-1146075-1280x0.jpeg')}}" alt="" class="play-img">
+   <img src="{{asset('uploads/movie/poster/'.$movie->poster)}}" alt="" class="play-img">
 
    <div class="play-text">
        <h2 class="play-title">{{$movie->title}}</h2>
@@ -31,8 +31,8 @@
    </div>
 </div>
 <div class="about-movie container">
-   <h2>Jumanji: Welcome</h2>
-   <p>Lorem ispem</p>
+   <h2>{{$movie->title}}</h2>
+   <p>{{$movie->description}}</p>
    <h2 class="cast-heading">Movie Cast</h2>
    <div class="cast">
        <div class="cast-box">

@@ -41,6 +41,7 @@ class AdminMovieController extends Controller
         $movie = new Movie();
         $movie->title = $data['title'];
         $movie->description = $data['description'];
+        $movie->actor = $data['actor'];
         $movie->slug = $data['slug'];
         $movie->status = $data['status'];
         $movie->link_stream = $data['link_stream'];
@@ -49,7 +50,9 @@ class AdminMovieController extends Controller
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
         $get_image = $request->file('image');
+        $get_poster = $request->file('poster');
         $path = 'uploads/movie/';
+        $path_poster = 'uploads/movie/poster';
         if ($get_image) {
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
@@ -57,21 +60,20 @@ class AdminMovieController extends Controller
             $get_image->move($path, $new_image);
             $movie->image = $new_image;
         }
+        if ($get_poster) {
+            $get_name_poster = $get_poster->getClientOriginalName();
+            $name_poster = current(explode('.', $get_name_poster));
+            $new_poster = $name_poster . rand(0, 9999) . '.' . $get_poster->getClientOriginalExtension();
+            $get_poster->move($path_poster, $new_poster);
+            $movie->poster = $new_poster;
+        }
         $movie->save();
         return redirect()->back();
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $listCategoriesToChoose = Category::pluck('title', 'id');
@@ -91,6 +93,7 @@ class AdminMovieController extends Controller
         $movie =  Movie::find($id);
         $movie->title = $data['title'];
         $movie->description = $data['description'];
+        $movie->actor = $data['actor'];
         $movie->slug = $data['slug'];
         $movie->status = $data['status'];
         $movie->link_stream = $data['link_stream'];
@@ -99,7 +102,9 @@ class AdminMovieController extends Controller
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
         $get_image = $request->file('image');
+        $get_poster = $request->file('poster');
         $path = 'uploads/movie/';
+        $path_poster = 'uploads/movie/poster';
         if ($get_image) {
             if (!empty($movie->image)) {
                 unlink('uploads/movie/' . $movie->image);
@@ -110,13 +115,24 @@ class AdminMovieController extends Controller
             $get_image->move($path, $new_image);
             $movie->image = $new_image;
         }
+        if ($get_poster) {
+            if (!empty($movie->poster)) {
+                $filePath = 'uploads/movie/poster/' . $movie->image;
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                } else {
+                    echo "File not found or already deleted.";
+                }
+            }
+            $get_name_poster = $get_poster->getClientOriginalName();
+            $name_poster = current(explode('.', $get_name_poster));
+            $new_poster = $name_poster . rand(0, 9999) . '.' . $get_poster->getClientOriginalExtension();
+            $get_poster->move($path_poster, $new_poster);
+            $movie->poster = $new_poster;
+        }
         $movie->save();
         return redirect()->back();
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $movie =  Movie::find($id);
