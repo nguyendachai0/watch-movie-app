@@ -3,10 +3,10 @@
 <main>
 <section class="movies container" id="movies">
     <div class="heading">
-        <h2 class="heading-title">{{$country_slug->title}}</h2>
+        <h2 class="heading-title">Lọc phim</h2>
     </div>
     <div class="movies-content">
-        @foreach($movieWithSlug as $movie )
+        @foreach($movieFilterList as $movie )
         <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $movie->slug) }}')">           
             <img src="{{asset('uploads/movie/'.$movie->image)}}" alt="" class="movie-box-img">
             <div class="box-text">

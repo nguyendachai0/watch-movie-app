@@ -15,7 +15,7 @@
 
 <section class="popular container" id="popular">
     <div class="heading">
-        <h2 class="heading-title">Phim phổ biến</h2>
+        <h2 id="popular" class="heading-title">Phim phổ biến</h2>
         <div class="swiper-btn">
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>

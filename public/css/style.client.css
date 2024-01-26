@@ -55,8 +55,12 @@ header {
     left: 0;
     width:100%;
     background: var(--body-color);
-    z-index: 0;
+    z-index: 1;
 
+}
+main {
+    
+    margin-top: 5rem;
 }
 .nav {
     display: flex;
@@ -424,7 +428,6 @@ font-size: 1.1rem;
     color: var(--main-color);
 }
 .about-movie p {
-    max-width: 600px;
     font-size: 0.938rem;
     margin: 10px 0;
 }

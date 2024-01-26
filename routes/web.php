@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\AdminMovieController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Client\IndexController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +34,8 @@ Route::get('/the-loai/{slug}', [IndexController::class, 'genre'])->name('genre')
 Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('country');
 Route::get('/phim/{slug}', [IndexController::class, 'movie'])->name('movie');
 Route::get('/xem-phim/{slug}', [IndexController::class, 'watch'])->name('watch');
+Route::get('/xem-trailer/{slug}', [IndexController::class, 'watchTrailer'])->name('watchTrailer');
+Route::get('/loc-phim/', [IndexController::class, 'filterMovie'])->name('filterMovie');
 Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
 Auth::routes([
     'verify' => true
