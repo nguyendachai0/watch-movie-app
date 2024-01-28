@@ -32,15 +32,13 @@ Route::get('/', [IndexController::class, 'index'])->name('homepage');
 Route::get('/danh-muc/{slug}', [IndexController::class, 'category'])->name('category');
 Route::get('/the-loai/{slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('country');
-Route::get('/phim/{slug}', [IndexController::class, 'movie'])->name('movie');
-Route::get('/xem-phim/{slug}', [IndexController::class, 'watch'])->name('watch');
+Route::get('/xem-phim/{slug}', [IndexController::class, 'watch'])->where('slug', '.*')->name('watch');
 Route::get('/xem-trailer/{slug}', [IndexController::class, 'watchTrailer'])->name('watchTrailer');
 Route::get('/loc-phim', [IndexController::class, 'filterMovie'])->name('filterMovie');
-Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
 Auth::routes([
     'verify' => true
 ]);
-Route::get('/admin', [HomeController::class, 'index'])->name('home')->middleware('auth', 'verified', 'role:admin');
+Route::get('/admin', [HomeController::class, 'index'])->name('admin')->middleware('auth', 'verified', 'role:admin');
 Route::resource('admin/category', AdminCategoryController::class)->middleware('auth', 'verified', 'role:admin');
 Route::resource('admin/country', AdminCountryController::class)->middleware('auth', 'verified', 'role:admin');
 Route::resource('admin/genre', AdminGenreController::class)->middleware('auth', 'verified', 'role:admin');

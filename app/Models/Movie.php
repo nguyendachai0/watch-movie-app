@@ -21,4 +21,16 @@ class Movie extends Model
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
+    public function changeLinkStreamForEachEpisode($episodeString)
+    {
+        $episodeArray = explode(' ', $episodeString);
+        $episodesAssocArray = [];
+        foreach ($episodeArray as $episode) {
+            $parts = explode('|', $episode);
+            $episodeNumber = $parts[0];
+            $link = $parts[1];
+            $episodesAssocArray[$episodeNumber] = $link;
+        }
+        return $episodesAssocArray;
+    }
 }

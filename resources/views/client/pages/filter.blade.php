@@ -27,13 +27,13 @@
     </form>
     </div>
     <div class="movies-content">
-        @foreach($movieFilterList as $movie )
-        <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $movie->slug) }}')">           
-            <img src="{{asset('uploads/movie/'.$movie->image)}}" alt="" class="movie-box-img">
+        @foreach($movieFilterList as $mov )
+        <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $mov->slug) }}')">           
+            <img src="{{asset('uploads/movie/'.$mov->image)}}" alt="" class="movie-box-img">
             <div class="box-text">
-                <h2 class="movie-title">{{$movie->title}}</h2>
-                <span class="movie-type">{{$movie->genre->title}}</span>
-                <a href="{{route('watch', $movie->slug)}}" class="watch-btn play-btn">
+                <h2 class="movie-title">{{$mov->title}}</h2>
+                <span class="movie-type">{{$mov->genre->title}}</span>
+                <a href="{{route('watch', $mov->slug)}}" class="watch-btn play-btn">
                     <i class="bx bx-right-arrow"></i>
                 </a>
             </div>

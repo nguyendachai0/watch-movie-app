@@ -3,8 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="{{isset($movie) ?  $movie->description : 'Phim Mới chất lượng cao miễn phí. Xem phim hd VietSub. Phim thuyết minh chất lượng HD. Kho phimmoi.net chuẩn nhanh online hay hấp dẫn.'}}">
+    <meta name="keywords" content="{{isset($movie) ?  $movie->title. ',' .$movie->category->title : 'Phim Trung Quốc, Phim Hàn Quốc, Phim chiếu rạp, Phim hành động, Phim kinh di, Phim hài, Phim hoạt hình, Phim Mỹ, Phim Võ Thuật, Phim bộ hay nhất, Xem phim Online'}}">
+    <meta name="author" content="Nguyen Dac Hai">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{isset($movie) ?  $movie->title : 'Nghiện phim'}} {{isset($cate_slug) ? ' - '.$cate_slug->title : ''}} </title>
+    <link rel="icon" type="image/svg+xml" href="{{asset('assets/logo.svg')}}">
     <link rel="stylesheet" href="{{asset('css/style.client.css')}}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" rel="stylesheet">

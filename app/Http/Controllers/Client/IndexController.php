@@ -16,7 +16,8 @@ class IndexController extends Controller
     {
         $category_home = Category::with('movie')->orderBy('id', 'desc')->where('status', 1)->get();
         $popularMovies = Movie::orderBy('id', 'desc')->where('status', 2)->get();
-        return view('client.pages.home', compact('category_home', 'popularMovies'));
+        $banner_movie = Movie::where('status', 3)->get()->first();
+        return view('client.pages.home', compact('category_home', 'popularMovies', 'banner_movie'));
     }
     public function category($slug)
     {
@@ -43,15 +44,21 @@ class IndexController extends Controller
             return view('client.pages.country', compact('country_slug', 'movieWithSlug'));
         }
     }
-    public function movie($slug)
-    {
-
-        $movie = Movie::where('slug', $slug)->first();
-        return view('client.pages.movie', compact('movie'));
-    }
     public function watch($slug)
     {
-        $movie = Movie::where('slug', $slug)->first();
+        $parts = explode('/', $slug);
+        $movie = Movie::where('slug', $parts[0])->first();
+        if ($movie->category && $movie->category->title == 'Phim bộ') {
+            $movie->link_stream = $movie->changeLinkStreamForEachEpisode($movie->link_stream);
+            $sumEpisode = count($movie->link_stream);
+            $episode = isset($parts[1]) ? $parts[1] : 1;
+            $movie->link_stream = $movie->link_stream[$episode];
+            $sumEpisode = isset($sumEpisode) ? $sumEpisode : 0;
+            $episode = isset($episode) ? $episode : 1;
+            $castListName = explode(', ', $movie->actor);
+            $castList = Cast::whereIn('name', $castListName)->get();
+            return view('client.pages.watch', compact('movie', 'castList', 'sumEpisode', 'episode'));
+        }
         $castListName = explode(', ', $movie->actor);
         $castList = Cast::whereIn('name', $castListName)->get();
         return view('client.pages.watch', compact('movie', 'castList'));
@@ -82,9 +89,5 @@ class IndexController extends Controller
         }
         $movieFilterList = $query->get();
         return view('client.pages.filter', compact('movieFilterList'));
-    }
-    public function episode()
-    {
-        return view('client.pages.episode');
     }
 }

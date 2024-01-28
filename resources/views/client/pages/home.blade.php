@@ -1,13 +1,13 @@
 @extends('client.layouts.layout')
 @section('content')
 <section class="home container" id="home">
-    <img src="img/home-background.png" alt="" class="home-img">
+    <img src="{{asset('uploads/movie/poster/'. $banner_movie->poster)}}" alt="" class="home-img">
     <div class="home-text">
-        <h1 class="home-title"> Hitman's Wife's Bodyguard </h1>
-        <p> Realeasing in 10 April</p>
-        <a href="#" class="watch-btn">
+        <h1 class="home-title"> {{$banner_movie->title}} </h1>
+        <p>Xem hoặc nhận một viên kẹo đồng</p>
+        <a href="{{route('watch', $banner_movie->slug)}}" class="watch-btn">
             <i class="bx bx-right-arrow"></i>
-            <span>Watch the trailer</span>
+            <span>Watch movie</span>
         </a>
     </div>
 
@@ -25,14 +25,14 @@
 
     <div class="popular-content swiper">
         <div class="swiper-wrapper">
-            @foreach($popularMovies as $movie)
+            @foreach($popularMovies as $mov)
             <div class="swiper-slide">
-                <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $movie->slug) }}')">
-                    <img src="{{asset('uploads/movie/'.$movie->image)}}" alt="" class="movie-box-img">
+                <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $mov->slug) }}')">
+                    <img src="{{asset('uploads/movie/'.$mov->image)}}" alt="" class="movie-box-img">
                     <div class="box-text">
-                        <h2 class="movie-title">{{$movie->title}}</h2>
-                        <span class="movie-type">{{$movie->genre->title}}</span>
-                        <a href="{{route('watch', $movie->slug)}}" class="watch-btn play-btn">
+                        <h2 class="movie-title">{{$mov->title}}</h2>
+                        <span class="movie-type">{{$mov->genre->title}}</span>
+                        <a href="{{route('watch', $mov->slug)}}" class="watch-btn play-btn">
                             <i class="bx bx-right-arrow"></i>
                         </a>
                     </div>
@@ -50,13 +50,13 @@
         <h2 class="heading-title">{{$category->title}}</h2>
     </div>
     <div class="movies-content">
-        @foreach($category->movie->take(12) as $movie )
-        <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $movie->slug) }}')">           
-            <img src="{{asset('uploads/movie/'.$movie->image)}}" alt="" class="movie-box-img">
+        @foreach($category->movie->take(12) as $mov )
+        <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $mov->slug) }}')">           
+            <img src="{{asset('uploads/movie/'.$mov->image)}}" alt="" class="movie-box-img">
             <div class="box-text">
-                <h2 class="movie-title">{{$movie->title}}</h2>
-                <span class="movie-type">{{$movie->genre->title}}</span>
-                <a href="{{route('watch', $movie->slug)}}" class="watch-btn play-btn">
+                <h2 class="movie-title">{{$mov->title}}</h2>
+                <span class="movie-type">{{$mov->genre->title}}</span>
+                <a href="{{route('watch', $mov->slug)}}" class="watch-btn play-btn">
                     <i class="bx bx-right-arrow"></i>
                 </a>
             </div>

@@ -23,13 +23,25 @@
    <i class="bx bx-right-arrow play-movie" id="play-movie"></i>
    <div class="video-container">
        <div class="video-box">
-           <iframe id="myvideo" src="{{$movie->link_stream}}" ></iframe>
+           <iframe id="myvideo" allowfullscreen src="{{$movie->link_stream}}"> <button id="backward-btn">Backward</button>
+            <button id="forward-btn">Forward</button></iframe>
            <i class="bx bx-x close-video"></i>
        </div>
    </div>
 </div>
 <section class="about-movie container">
-   <h2>{{$movie->title}}</h2>
+   <h2>{{$movie->title}} 
+    @if(isset($episode))
+    Tập {{$episode}}
+    @endif
+</h2>
+@if(isset($sumEpisode))
+   <div class="episodes">
+       @for ($i = 1; $i <= $sumEpisode; $i++)
+       <a href="{{route('watch', $movie->slug . '/' . $i)}}" class="episodes-btn">{{$i}}</a>
+       @endfor
+ </div>
+ @endif
    <p>{{$movie->description}}</p>
    @if(count($castList) != 0)
    <h2 class="cast-heading">Movie Cast</h2>
