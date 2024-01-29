@@ -5,18 +5,26 @@
         <div class="column">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('register') }}">
                         <!-- CSRF Field -->  
-                        @csrf                 
-                       
+                        @csrf     
+                        <div class="form-group">
+                            <label for="email">Name</label>
+                            <input id="name" type="text" name="name" required>
+                            @error('name')
+                            <small class="error">
+                               {{ $message }}
+                            </small>
+                            @enderror                     
+                           </div>             
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             <input id="email" type="email" name="email" required>
                             @error('email')
-                                    <small class="error">
-                                       {{ $message }}
-                                    </small>
-                                @enderror
+                            <small class="error">
+                               {{ $message }}
+                            </small>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
@@ -26,21 +34,22 @@
                             <small class="error">
                                {{ $message }}
                             </small>
-                        @enderror
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Confirm Password</label>
+                            <input id="password" type="password" name="password_confirmation" required>
+                         
                         </div>
                         <div class="form-group submit">
                             <button type="submit">
-                                {{ __('Login') }}
+                                {{ __('Register') }}
                             </button>
-                            @if (Route::has('password.request'))
-                            <a  href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
-                            </a>
-                        @endif
+                         
                         </div>
 
                         <div class="form-group submit">
-                            <a class="btn btn-secondary" href="{{route('google-auth')}}">Continue with google</a>
+                            <a class="btn btn-secondary" href="{{route('google-auth')}}">Register with google</a>
                         </div>
                     </form>
                 </div>

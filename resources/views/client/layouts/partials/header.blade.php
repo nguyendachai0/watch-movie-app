@@ -3,11 +3,41 @@
         <a href="{{route('homepage')}}" class="logo">
             Nghiện<span>Phim</span>           
         </a>
-
+        <div class="search-container">
         <div class="search-box">
             <input type="search" name="" id="search-input" placeholder="Search movie">
             <i class="bx bx-search"></i>
         </div>
+        <div id="box-dropdown">
+            <ul id="dropdown-src"></ul>
+        </div>
+    </div>
+        <script>
+              var watchBaseUrl = "{{ url('xem-phim') }}";
+            document.getElementById('search-input').addEventListener('input', function() {
+                let query = this.value;
+                let resultsDiv = document.getElementById('dropdown-src');
+                if (query.length >= 3) {
+                    fetch(`/search/suggestions?query=${query}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let resultsDiv = document.getElementById('dropdown-src');
+                            resultsDiv.innerHTML = '';
+                            data.forEach(movie => {
+                                let linkItem = document.createElement('li');
+                                let link = document.createElement('a');
+                                link.href = link.href = watchBaseUrl + '/' + movie.slug;
+                                link.textContent = movie.title;
+                                linkItem.appendChild(link);
+                                resultsDiv.appendChild(linkItem);
+                            });
+                        });
+                }else {
+                    let resultsDiv = document.getElementById('dropdown-src');
+                    resultsDiv.innerHTML = '';
+                }
+            });
+        </script>
         <div>
             @if(Auth::check())
             <a>{{ Auth::user()->name }}</a>

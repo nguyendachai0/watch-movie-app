@@ -26,10 +26,10 @@ class GoogleAuthController extends Controller
                     'email_verified_at' => now(),
                 ]);
                 Auth::login($new_user);
-                return redirect()->intended('admin');
+                return redirect()->intended('/');
             } else {
                 Auth::login($user);
-                return redirect()->intended('admin');
+                return redirect()->intended('/');
             }
         } catch (\Throwable $th) {
             dd('Something went wrong', $th->getMessage());

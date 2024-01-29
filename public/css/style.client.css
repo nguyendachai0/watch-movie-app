@@ -58,14 +58,61 @@ header {
     background: var(--body-color);
     z-index: 1;
 }
+#box-dropdown{
+   width:100%;
+   box-shadow: 0 0 2px #999999;
+   background: #5398d1;
+   border-radius: 7px;
+   position: absolute;
+   top:55px;
+}
+#box-dropdown ul {
+    list-style-type: none;
+    border-radius: 7px;
+    padding: 0;
+    margin: 0;
+    max-height: 500px;
+}
+#box-dropdown ul li {
+    padding: 10px;
+    cursor:pointer;
+    display: block;
+    color: #fff;
+    border-bottom: 1px solid rgb(129, 40, 85);
+}
+#box-dropdown ul li:hover {
+    background: #395888;
+    color: #d2a7ff;
+}
+#box-dropdown ul :first-child {
+    border-radius: 7px 0 0 0 ;
+}
+#box-dropdown ul :last-child {
+    border-radius: 0 0 0 7px;
+}
+
+
 header a {
     text-decoration: none;
     color: white;
     margin: 0 4px;
 }
+header button {
+    background-color: var(--main-color);
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    padding: 1px 4px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+header button:hover {
+    background: #b7b7b7;
+    color: black;
+}
 main {
-    
-    margin-top: 5rem;
+  margin-top: 5rem;
 }
 .nav {
     display: flex;
@@ -538,6 +585,7 @@ font-size: 1.1rem;
 
 .auth .form-group {
     margin-bottom: 15px;
+
 }
 
 .auth .form-group label {
@@ -545,7 +593,11 @@ font-size: 1.1rem;
     margin-bottom: 5px;
 }
 
+.form-group.submit {
+    text-align: center;
+}
 .form-group input[type='email'], 
+.form-group input[type='text'], 
 .form-group input[type='password'],
 .form-group input[type='checkbox'],
 .form-group button,
@@ -554,6 +606,10 @@ font-size: 1.1rem;
     padding: 10px;
     margin-bottom: 10px;
 }
+.error {
+    color: #00ffe7;
+}
+
 
 .form-group button {
     background-color: var(--main-color);
@@ -565,6 +621,7 @@ font-size: 1.1rem;
 .form-group a {
     color: #f908b9;
     text-decoration: none;
+    
 }
 /* Responsive */
 @media (max-width: 1170px){
@@ -700,6 +757,10 @@ font-size: 1.1rem;
     .cast-title {
         font-size: 0.9rem;
     }
+    .auth .column {
+        flex: 0 0 80%;
+        max-width: 80%;
+    }
 
 }
 @media (max-width: 408px){
@@ -759,4 +820,39 @@ font-size: 1.1rem;
    .download-links {
     grid-template-columns: 1fr;
    }
+   #box-dropdown{
+  
+    top:85px;
+ }
+   .auth {
+    /* Adjust the properties of .auth for small screens */
+    padding: 10px; /* Example: reduce padding */
+}
+
+.auth .column {
+    flex: 0 0 100%; 
+    max-width: 100%; 
+}
+
+.auth .card {
+   
+    margin-bottom: 10px; 
+}
+
+.auth .card-body,
+.form-group input[type='email'], 
+.form-group input[type='text'], 
+.form-group input[type='password'],
+.form-group input[type='checkbox'],
+.form-group button,
+.form-group a {
+    padding: 5px;
+}
+#box-dropdown ul li {
+    padding: 5px;
+    display: block;
+    font-size:small;
+    color: #fff;
+    border-bottom: 1px solid rgb(129, 40, 85);
+}
 }

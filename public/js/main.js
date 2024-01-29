@@ -58,3 +58,4 @@ closebtn.onclick = () => {
     function redirectToWatch(url) {
         window.location.href = url;
     }
+   
