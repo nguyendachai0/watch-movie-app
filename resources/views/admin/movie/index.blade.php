@@ -12,6 +12,10 @@
                         <h4 class="card-title">
                             Movie 
                         </h4>
+                        <form action="{{ route('update.movies') }}" method="POST">
+                            @csrf
+                        <button type="submit" class="btn btn-info" id="updateMoviesButton">Update Movies with API</button>
+                        </form>
                     </div>
                     <div class="card-body">
                         <div class="form-validation">

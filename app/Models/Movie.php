@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
 {
-    public $timestamps = false;
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['title', 'description', 'image', 'category_id', 'genre_id', 'country_id', 'active', 'status', 'poster', 'link_trailer', 'link_stream', 'actor', 'slug'];
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-    public function genre()
+    public function genres()
     {
-        return $this->belongsTo(Genre::class, 'genre_id');
+        return $this->belongsToMany(Genre::class, 'movie_genre');
     }
     public function country()
     {

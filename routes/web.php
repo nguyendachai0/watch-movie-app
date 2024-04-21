@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminMovieController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\UpdateMovieAPIController;
 use App\Http\Controllers\Client\IndexController;
 use App\Http\Controllers\Client\MovieController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -33,4 +34,5 @@ Route::resource('admin/category', AdminCategoryController::class)->middleware('a
 Route::resource('admin/country', AdminCountryController::class)->middleware('auth', 'verified', 'role:admin');
 Route::resource('admin/genre', AdminGenreController::class)->middleware('auth', 'verified', 'role:admin');
 Route::resource('admin/movie', AdminMovieController::class)->middleware('auth', 'verified', 'role:admin');
+Route::post('/update-movies', [UpdateMovieAPIController::class, 'updateMovies'])->name('update.movies')->middleware('auth', 'verified', 'role:admin');
 // Route::get('/admin', [HomeController::class, 'index'])->name('home');
