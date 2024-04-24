@@ -47,7 +47,9 @@ class IndexController extends Controller
     public function watch($slug)
     {
         $parts = explode('/', $slug);
+
         $movie = Movie::where('slug', $parts[0])->first();
+
         if ($movie->category && $movie->category->title == 'Phim bộ') {
             $movie->link_stream = $movie->changeLinkStreamForEachEpisode($movie->link_stream);
             $sumEpisode = count($movie->link_stream);

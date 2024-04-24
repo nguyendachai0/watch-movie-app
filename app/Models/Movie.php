@@ -9,7 +9,10 @@ class Movie extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['title', 'description', 'image', 'category_id', 'genre_id', 'country_id', 'active', 'status', 'poster', 'link_trailer', 'link_stream', 'actor', 'slug'];
+    protected $fillable = [
+        'title', 'description', 'image', 'category_id', 'active', 'status', 'poster', 'link_trailer', 'link_stream', 'slug', 'origin_title', 'o_phim_id', 'link_m3u8', 'link_server_2',
+        'link_server_3', 'link_server_4', 'link_server_5'
+    ];
 
     public function category()
     {
@@ -19,9 +22,13 @@ class Movie extends Model
     {
         return $this->belongsToMany(Genre::class, 'movie_genre');
     }
-    public function country()
+    public function countries()
     {
-        return $this->belongsTo(Country::class, 'country_id');
+        return $this->belongsToMany(Country::class, 'movie_country');
+    }
+    public function casts()
+    {
+        return $this->belongsToMany(Cast::class, 'movie_cast');
     }
     public function changeLinkStreamForEachEpisode($episodeString)
     {

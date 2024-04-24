@@ -9,4 +9,9 @@ class Country extends Model
 {
     public $timestamps = false;
     use HasFactory;
+    protected $fillable = ['title', 'status', 'slug'];
+    public function movies()
+    {
+        return $this->belongsToMany(Movie::class,  'movie_country');
+    }
 }

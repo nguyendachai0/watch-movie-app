@@ -8,10 +8,12 @@
     <div class="movies-content">
         @foreach($movieWithSlug as $mov )
         <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $mov->slug) }}')">           
-            <img src="{{asset('uploads/movie/'.$mov->image)}}" alt="" class="movie-box-img">
+            <img src="{{$mov->image}}" alt="" class="movie-box-img">
             <div class="box-text">
                 <h2 class="movie-title">{{$mov->title}}</h2>
-                <span class="movie-type">{{$mov->genre->title}}</span>
+                @foreach($mov->genres as $genre)
+                <span class="movie-type">{{$genre->title}}</span>
+                @endforeach
                 <a href="{{route('watch', $mov->slug)}}" class="watch-btn play-btn">
                     <i class="bx bx-right-arrow"></i>
                 </a>

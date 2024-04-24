@@ -1,6 +1,6 @@
 @extends('client.layouts.layout')
 @section('content')
-<section class="home container" id="home">
+{{-- <section class="home container" id="home">
     <img src="{{asset('uploads/movie/poster/'. $banner_movie->poster)}}" alt="" class="home-img">
     <div class="home-text">
         <h1 class="home-title"> {{$banner_movie->title}} </h1>
@@ -11,7 +11,7 @@
         </a>
     </div>
 
-</section>
+</section> --}}
 
 <section class="popular container" id="popular">
     <div class="heading">
@@ -52,10 +52,12 @@
     <div class="movies-content">
         @foreach($category->movie->take(12) as $mov )
         <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $mov->slug) }}')">           
-            <img src="{{asset('uploads/movie/'.$mov->image)}}" alt="" class="movie-box-img">
+            <img src="{{$mov->image}}" alt="" class="movie-box-img">
             <div class="box-text">
                 <h2 class="movie-title">{{$mov->title}}</h2>
-                <span class="movie-type">{{$mov->genre->title}}</span>
+                @foreach($mov->genres as $genre)
+    <span class="movie-type">{{ $genre->title }}</span>
+@endforeach
                 <a href="{{route('watch', $mov->slug)}}" class="watch-btn play-btn">
                     <i class="bx bx-right-arrow"></i>
                 </a>

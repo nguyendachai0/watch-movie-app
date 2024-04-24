@@ -1,7 +1,7 @@
 @extends('client.layouts.layout')
 @section('content')
 <div class="play-container container">
-   <img src="{{asset('uploads/movie/poster/'.$movie->poster)}}" alt="" class="play-img">
+   <img src="{{$movie->poster}}" alt="" class="play-img">
    <div class="play-text">
        <h2 class="play-title">{{$movie->title}}</h2>
        <div class="rating">
@@ -12,7 +12,9 @@
            <i class="bx bxs-star-half"></i>
        </div>
        <div class="tags">
-           <span>{{$movie->genre->title}}</span>
+        @foreach($movie->genres as $genre)
+           <span>{{$genre->title}}</span>
+           @endforeach
            <span>4K</span>
  </div>
        <a href="{{route('watchTrailer', $movie->slug)}}" class="watch-btn" id="watch-trailer-btn">

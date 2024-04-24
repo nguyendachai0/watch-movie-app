@@ -236,10 +236,14 @@
                                                 {{$movie->category->title}}
                                             </td>
                                             <td>
-                                                {{$movie->country->title}}
+                                                @foreach($movie->countries as $country)
+                                                <span class="movie-type">{{ $country->title }}</span>
+                                            @endforeach
                                             </td>
                                             <td>
-                                                {{$movie->genre->title}}
+                                                @foreach($movie->genres as $genre)
+                                                <span class="movie-type">{{ $genre->title }}</span>
+                                            @endforeach
                                             </td>
                                             <td>
                                                 <div class="dropdown">
