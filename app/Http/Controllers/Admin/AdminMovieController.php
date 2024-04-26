@@ -13,9 +13,9 @@ class AdminMovieController extends Controller
 {
     public function index()
     {
-        $listCategoriesToChoose = Category::pluck('title', 'id');
-        $listGenresToChoose = Genre::pluck('title', 'id');
-        $listCountriesToChoose = Country::pluck('title', 'id');
+        $listCategoriesToChoose = Category::pluck('name', 'id');
+        $listGenresToChoose = Genre::pluck('name', 'id');
+        $listCountriesToChoose = Country::pluck('name', 'id');
         $listMovies = Movie::all();
         return view('admin.movie.index', compact('listMovies', 'listCategoriesToChoose', 'listGenresToChoose', 'listCountriesToChoose'));
     }

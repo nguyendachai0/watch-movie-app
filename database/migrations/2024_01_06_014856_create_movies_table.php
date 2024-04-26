@@ -13,16 +13,19 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100);
-            $table->string('description', 255);
-            $table->integer('status');
+            $table->string('o_phim_id')->nullable();
+            $table->string('name', 100);
+            $table->integer('status')->default(1);
             $table->string('slug', 255);
-            $table->string('image', 255);
+            $table->string('thumb', 255);
+            $table->string('poster', 255);
+            $table->text('link_stream')->nullable();
+            $table->text('link_m3u8')->nullable();
+            $table->text('link_server_2')->nullable();
+            $table->text('link_server_3')->nullable();
+            $table->text('link_server_4')->nullable();
+            $table->text('link_server_5')->nullable();
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('country_id');
-            $table->unsignedBigInteger('genre_id');
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->foreign('genre_id')->references('id')->on('genres');
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }

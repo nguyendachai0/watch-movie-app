@@ -9,7 +9,7 @@ class Genre extends Model
 {
     public $timestamps = false;
     use HasFactory;
-    protected $fillable = ['title', 'status', 'slug'];
+    protected $fillable = ['name', 'status', 'slug'];
     public function movies()
     {
         return $this->belongsToMany(Movie::class,  'movie_genre');

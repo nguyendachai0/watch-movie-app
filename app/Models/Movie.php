@@ -10,7 +10,7 @@ class Movie extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'title', 'description', 'image', 'category_id', 'active', 'status', 'poster', 'link_trailer', 'link_stream', 'slug', 'origin_title', 'o_phim_id', 'link_m3u8', 'link_server_2',
+        'name', 'description', 'thumb', 'category_id', 'active', 'status', 'poster', 'link_trailer', 'link_stream', 'slug', 'origin_name', 'o_phim_id', 'link_m3u8', 'link_server_2',
         'link_server_3', 'link_server_4', 'link_server_5'
     ];
 

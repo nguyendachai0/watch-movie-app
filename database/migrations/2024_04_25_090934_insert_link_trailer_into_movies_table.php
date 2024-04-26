@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        Schema::table('movies', function ($table) {
-            $table->dropForeign('movies_country_id_foreign');
+        Schema::table('movies', function (Blueprint $table) {
+            $table->string('link_trailer')->nullable();
         });
     }
 
@@ -22,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('movies', function ($table) {
-            $table->foreign('country_id')->references('id')->on('countries');
+        Schema::table('movies', function (Blueprint $table) {
+            $table->dropColumn('link_trailer');
         });
     }
 };

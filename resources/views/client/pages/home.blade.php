@@ -55,9 +55,11 @@
             <img src="{{$mov->image}}" alt="" class="movie-box-img">
             <div class="box-text">
                 <h2 class="movie-title">{{$mov->title}}</h2>
+                @if(isset($mov->genres))
                 @foreach($mov->genres as $genre)
     <span class="movie-type">{{ $genre->title }}</span>
 @endforeach
+@endif
                 <a href="{{route('watch', $mov->slug)}}" class="watch-btn play-btn">
                     <i class="bx bx-right-arrow"></i>
                 </a>
