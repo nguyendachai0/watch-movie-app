@@ -3,7 +3,7 @@
 <main>
    <section class="movies container" id="movies">
        <div class="heading">
-           <h2 class="heading-title">{{$genre_slug->title}}</h2>
+           <h2 class="heading-title">{{$genre_slug->name}}</h2>
        </div>
        <div class="movies-content">
            @foreach($movieWithSlug as $movie )

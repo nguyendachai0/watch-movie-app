@@ -58,20 +58,28 @@
                 <i class="bx bx-home"></i>
                 <span class="nav-link-title">Trang chủ</span>
             </a>
-            @if(request()->is('/'))
-            <a href="#popular" class="nav-link">
+            @foreach ($headerCategories as $category)
+            <a href="{{route('category', $category->slug)}}" class="nav-link">
+                @if($category->slug == 'single')
+                <i class='bx bxs-movie'></i>
+            @elseif($category->slug == 'series')
+                <i class='bx bxs-tv'></i>
+            @elseif($category->slug == 'hoat-hinh')
                 <i class='bx bxs-hot'></i>
-                <span class="nav-link-title">Phim hot</span>
-            </a>
+            @elseif($category->slug == 'tv-shows')
+                <i class='bx bxs-tv'></i>
             @endif
-            <a href="{{route('category','phim-le')}}" class="nav-link">
+                <span class="nav-link-title">{{$category->name}}</span>
+            </a>
+            @endforeach
+            {{-- <a href="{{route('category','phim-le')}}" class="nav-link">
                 <i class='bx bxs-movie'></i>
                 <span class="nav-link-title">Phim lẻ</span>
             </a>
             <a href="{{route('category', 'phim-bo')}}" class="nav-link">
                 <i class="bx bx-tv"></i>
                 <span class="nav-link-title">Phim bộ</span>
-            </a>
+            </a> --}}
             <a href="{{route('filterMovie')}}" class="nav-link">
                 <i class='bx bx-filter'></i>              
                     <span class="nav-link-title">Lọc phim</span>

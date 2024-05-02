@@ -16,13 +16,12 @@ class IndexController extends Controller
     {
         $category_home = Category::with('movie')->orderBy('id', 'desc')->where('status', 1)->get();
         $popularMovies = Movie::orderBy('id', 'desc')->where('status', 2)->get();
-        $banner_movie = Movie::where('status', 3)->get()->first();
-        return view('client.pages.home', compact('category_home', 'popularMovies', 'banner_movie'));
+        return view('client.pages.home', compact('category_home', 'popularMovies'));
     }
     public function category($slug)
     {
         $cate_slug = Category::where('slug', $slug)->first();
-        $movieWithSlug = Movie::where('category_id', $cate_slug->id)->get();
+        $movieWithSlug = Movie::where('category_id', $cate_slug->id)->paginate(20);
         return view('client.pages.category', compact('cate_slug', 'movieWithSlug'));
     }
     public function genre($slug)
@@ -49,8 +48,7 @@ class IndexController extends Controller
         $parts = explode('/', $slug);
 
         $movie = Movie::where('slug', $parts[0])->first();
-
-        if ($movie->category && $movie->category->title == 'Phim bộ') {
+        if ($movie->category && $movie->category->name == 'Phim Bộ') {
             $movie->link_stream = $movie->changeLinkStreamForEachEpisode($movie->link_stream);
             $sumEpisode = count($movie->link_stream);
             $episode = isset($parts[1]) ? $parts[1] : 1;

@@ -31,23 +31,28 @@ class UpdateMoviesJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $perPage = 50;
-        $totalPages = 1077; // Total number of pages
+        $totalPages = 1078; // Total number of pages
 
-        for ($page = 128; $page <= $totalPages; $page++) {
-            $response = Http::get('https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=' . $page);
-            $movies = $response->json()["items"];
-            foreach (array_chunk($movies, $perPage) as $batch) {
-                $movieDetails = $this->fetchMovieDetails($batch);
+        for ($page = 1060; $page <= $totalPages; $page++) {
+            try {
+                $response = Http::get('https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=' . $page);
+                $movies = $response->json()["items"];
+                $movieDetails = $this->fetchMovieDetails($movies);
                 foreach ($movieDetails as $movie) {
-
-                    if (!Movie::where('o_phim_id', $movie['movie']['_id'])->exists()) {
+                    if (isset($movie['movie']['_id'])) {
+                        if (!Movie::where('o_phim_id', $movie['movie']['_id'])->exists()) {
+                            $this->processMovie($movie);
+                        }
+                    } else {
                         $this->processMovie($movie);
                     }
                 }
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
             }
         }
     }
+
     private function fetchMovieDetails($movies)
     {
         $movieDetails = [];
@@ -73,7 +78,7 @@ class UpdateMoviesJob implements ShouldQueue
             $this->processLinks($movieData, $newMovie);
         } catch (\Exception $e) {
             // Log error and continue processing other movies
-            throw ($e);
+            Log::error("Error processing movie: {$e->getMessage()}");
         }
     }
 

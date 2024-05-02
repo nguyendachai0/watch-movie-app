@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,5 +42,21 @@ class Movie extends Model
             $episodesAssocArray[$episodeNumber] = $link;
         }
         return $episodesAssocArray;
+    }
+    protected function thumb(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => $this->changeDomainThumbAndPoster($value)
+        );
+    }
+    protected function poster(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => $this->changeDomainThumbAndPoster($value)
+        );
+    }
+    private function changeDomainThumbAndPoster($value)
+    {
+        return str_replace('15', '16', $value);
     }
 }

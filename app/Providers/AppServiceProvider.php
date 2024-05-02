@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Genre;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,5 +34,10 @@ class AppServiceProvider extends ServiceProvider
                 ->with('countries', $countries)
                 ->with('chunkedGenres', $chunkedGenres);
         });
+        view()->composer('client.layouts.partials.header', function ($view) {
+            $headerCategories = Category::all();
+            $view->with('headerCategories', $headerCategories);
+        });
+        Paginator::defaultView('vendor.pagination.semantic-ui');
     }
 }

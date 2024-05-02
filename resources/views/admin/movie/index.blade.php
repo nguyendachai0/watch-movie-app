@@ -17,7 +17,7 @@
                         <button type="submit" class="btn btn-info" id="updateMoviesButton">Update Movies with API</button>
                         </form>
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <div class="form-validation">
                            @if(isset($movieToEdit))
                            <form action="{{ route('movie.update', [ $movieToEdit->id]) }}" method="POST" enctype="multipart/form-data">
@@ -185,10 +185,10 @@
                                                 </div>
                                         </form>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -282,7 +282,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
