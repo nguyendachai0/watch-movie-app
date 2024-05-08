@@ -1,60 +1,39 @@
 @extends('client.layouts.layout')
+
 @section('content')
-<div class="play-container container">
-   <img src="{{$movie->poster}}" alt="" class="play-img">
-   <div class="play-text">
-       <h2 class="play-title">{{$movie->title}}</h2>
-       <div class="rating">
-           <i class="bx bxs-star"></i>
-           <i class="bx bxs-star"></i>
-           <i class="bx bxs-star"></i>
-           <i class="bx bxs-star"></i>
-           <i class="bx bxs-star-half"></i>
-       </div>
-       <div class="tags">
-        @foreach($movie->genres as $genre)
-           <span>{{$genre->title}}</span>
-           @endforeach
-           <span>4K</span>
- </div>
-       <a href="{{route('watchTrailer', $movie->slug)}}" class="watch-btn" id="watch-trailer-btn">
-           <i class="bx bx-right-arrow"></i>
-           <span>Watch the trailer</span>
-       </a>
-   </div>
-   <i class="bx bx-right-arrow play-movie" id="play-movie"></i>
-   <div class="video-container">
-       <div class="video-box">
-           <iframe id="myvideo" allowfullscreen src="{{$movie->link_stream}}"> <button id="backward-btn">Backward</button>
-            <button id="forward-btn">Forward</button></iframe>
-           <i class="bx bx-x close-video"></i>
-       </div>
-   </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">{{ $movie->name }}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <iframe id="movieIframe" name="movieIframe" class="embed-responsive-item" style="min-height: 100vh" src="{{ $movie->link_stream }}" allowfullscreen loading="lazy">
+            </iframe>
+        </div>
+       
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12 text-center">
+            <a href="{{$movie->link_stream}}"  target="movieIframe" class="btn btn-primary mr-2">Sub Link 1</a>
+            <a href="{{$movie->link_m3u8}}"   target="movieIframe" class="btn btn-secondary mr-2">Sub Link 2</a>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12 text-center">
+            @if(isset($sumEpisode))
+                @for($i = 1; $i <= $sumEpisode; $i++)  
+                    <a href="{{ route('watch', $movie->slug .'/'. $i ) }}" class="btn btn-primary mr-2">Tập {{ $i }}</a>
+                @endfor
+            @endif
+        </div>
+    </div>
 </div>
-<section class="about-movie container">
-   <h2>{{$movie->title}} 
-    @if(isset($episode))
-    Tập {{$episode}}
-    @endif
-</h2>
-@if(isset($sumEpisode))
-   <div class="episodes">
-       @for ($i = 1; $i <= $sumEpisode; $i++)
-       <a href="{{route('watch', $movie->slug . '/' . $i)}}" class="episodes-btn">{{$i}}</a>
-       @endfor
- </div>
- @endif
-   <p>{{$movie->description}}</p>
-   @if(count($castList) != 0)
-   <h2 class="cast-heading">Movie Cast</h2>
-   <div class="cast">
-      @foreach($castList as $cast)
-       <div class="cast-box">
-           <img src="{{$cast->image}}" alt="{{$cast->name}} image" class="cast-img">
-           <span class="cast-title">{{$cast->name}}</span>
-       </div>
-     @endforeach
-   </div>
-   @endif
-</section>
+
+
+
 @endsection

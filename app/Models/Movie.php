@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
 {
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
@@ -43,6 +44,11 @@ class Movie extends Model
         }
         return $episodesAssocArray;
     }
+    public function changeLinkTrailer($link_trailer)
+    {
+
+        return str_replace('watch?v=', 'embed/', $link_trailer);
+    }
     protected function thumb(): Attribute
     {
         return Attribute::make(
@@ -55,8 +61,12 @@ class Movie extends Model
             get: fn (string $value) => $this->changeDomainThumbAndPoster($value)
         );
     }
+    public function getLinkTrailerAttribute($value)
+    {
+        return $this->changeLinkTrailer($value);
+    }
     private function changeDomainThumbAndPoster($value)
     {
-        return str_replace('15', '16', $value);
+        return str_replace('15.cc', '.live', $value);
     }
 }

@@ -36,7 +36,14 @@ class AppServiceProvider extends ServiceProvider
         });
         view()->composer('client.layouts.partials.header', function ($view) {
             $headerCategories = Category::all();
-            $view->with('headerCategories', $headerCategories);
+            $headerGenres = Genre::all()->chunk(7);
+            $headerNation = Country::all()->chunk(6);
+
+            $view->with([
+                'headerCategories' => $headerCategories,
+                'headerGenres' => $headerGenres,
+                'headerNation' => $headerNation,
+            ]);
         });
         Paginator::defaultView('vendor.pagination.semantic-ui');
     }

@@ -10,9 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{isset($movie) ?  $movie->title : 'Nghiện phim'}} {{isset($cate_slug) ? ' - '.$cate_slug->title : ''}} </title>
     <link rel="icon" type="image/svg+xml" href="{{asset('assets/logo.svg')}}">
-    <link rel="stylesheet" href="{{asset('css/style.client.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/style.client.css')}}"> --}}
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/vendor.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/plugins.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/lozad@1.14.0/dist/lozad.min.js"></script>
 </head>
 
 <body>
@@ -21,8 +25,14 @@
     {{-- <div class="next-page">
         <a href="" class="next-btn">Next-page</a>
     </div> --}}
+    @include('client.layouts.partials.footer')
     <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script>
-    <script src="{{asset('js/main.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/vendor.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/plugins.min.js')}}"></script>
+
+    <!-- Main JS -->
+    <script src="{{asset('assets/js/main.js')}}"></script>
+    {{-- <script src="{{asset('js/main.js')}}"></script> --}}
 </body>
 
 </html>

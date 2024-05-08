@@ -8,6 +8,7 @@ use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UpdateMovieAPIController;
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\Client\IndexController;
 use App\Http\Controllers\Client\MovieController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -22,10 +23,11 @@ Route::get('/', [IndexController::class, 'index'])->name('homepage');
 Route::get('/danh-muc/{slug}', [IndexController::class, 'category'])->name('category');
 Route::get('/the-loai/{slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/quoc-gia/{slug}', [IndexController::class, 'country'])->name('country');
-Route::get('/xem-phim/{slug}', [IndexController::class, 'watch'])->where('slug', '.*')->name('watch');
-Route::get('/xem-trailer/{slug}', [IndexController::class, 'watchTrailer'])->name('watchTrailer');
+Route::get('/info/{slug}', [IndexController::class, 'info'])->name('info');
+Route::get('/xem/{slug}', [IndexController::class, 'watch'])->where('slug', '.*')->name('watch');
 Route::get('/loc-phim', [IndexController::class, 'filterMovie'])->name('filterMovie');
 Route::get('/search/suggestions', [MovieController::class, 'suggestions']);
+Route::get('/api', [APIController::class, 'api']);
 Auth::routes([
     'verify' => true
 ]);

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     public $timestamps = false;
     protected $fillable = ['name', 'status',   'created_at', 'updated_at'];
     use HasFactory;
-    public function movie()
+    public function movies()
     {
         return $this->hasMany(Movie::class, 'category_id');
     }

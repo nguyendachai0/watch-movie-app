@@ -14,54 +14,58 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $category_home = Category::with('movie')->orderBy('id', 'desc')->where('status', 1)->get();
-        $popularMovies = Movie::orderBy('id', 'desc')->where('status', 2)->get();
-        return view('client.pages.home', compact('category_home', 'popularMovies'));
+        $category_home = Category::with(['movies' => function ($query) {
+            $query->orderByDesc('id')->take(20);
+        }])
+            ->where('status', 1)
+            ->orderByDesc('id')
+            ->get();
+        return view('client.pages.home', compact('category_home'));
     }
     public function category($slug)
     {
         $cate_slug = Category::where('slug', $slug)->first();
         $movieWithSlug = Movie::where('category_id', $cate_slug->id)->paginate(20);
-        return view('client.pages.category', compact('cate_slug', 'movieWithSlug'));
+        $title = $cate_slug->name;
+        return view('client.pages.movie-list', compact('title', 'movieWithSlug'));
     }
     public function genre($slug)
     {
         $genre_slug = Genre::where('slug', $slug)->first();
-        if ($genre_slug) {
-            $movieWithSlug = Movie::where('genre_id', $genre_slug->id)->get();
-            return view('client.pages.genre', compact('genre_slug', 'movieWithSlug'));
-        } else {
-            return redirect('/');
-        }
+        $movieWithSlug = $genre_slug->movies()->paginate(20);
+        $title = $genre_slug->name;
+        return view('client.pages.movie-list', compact('title', 'movieWithSlug'));
     }
     public function country($slug)
     {
 
         $country_slug = Country::where('slug', $slug)->first();
-        if ($country_slug) {
-            $movieWithSlug = Movie::where('country_id', $country_slug->id)->get();
-            return view('client.pages.country', compact('country_slug', 'movieWithSlug'));
-        }
+        $movieWithSlug = $country_slug->movies()->paginate(20);
+        $title = $country_slug->name;
+        return view('client.pages.movie-list', compact('title', 'movieWithSlug'));
+    }
+    public function info($slug)
+    {
+        $movie = Movie::where('slug', $slug)->first();
+        return view('client.pages.info', compact('movie'));
     }
     public function watch($slug)
     {
         $parts = explode('/', $slug);
 
         $movie = Movie::where('slug', $parts[0])->first();
-        if ($movie->category && $movie->category->name == 'Phim Bộ') {
+        if (str_contains($movie->link_stream, '|')) {
             $movie->link_stream = $movie->changeLinkStreamForEachEpisode($movie->link_stream);
+            $movie->link_m3u8 = $movie->changeLinkStreamForEachEpisode($movie->link_m3u8);
             $sumEpisode = count($movie->link_stream);
             $episode = isset($parts[1]) ? $parts[1] : 1;
             $movie->link_stream = $movie->link_stream[$episode];
+            $movie->link_m3u8 = $movie->link_m3u8[$episode];
             $sumEpisode = isset($sumEpisode) ? $sumEpisode : 0;
             $episode = isset($episode) ? $episode : 1;
-            $castListName = explode(', ', $movie->actor);
-            $castList = Cast::whereIn('name', $castListName)->get();
-            return view('client.pages.watch', compact('movie', 'castList', 'sumEpisode', 'episode'));
+            return view('client.pages.watch', compact('movie', 'episode', 'sumEpisode'));
         }
-        $castListName = explode(', ', $movie->actor);
-        $castList = Cast::whereIn('name', $castListName)->get();
-        return view('client.pages.watch', compact('movie', 'castList'));
+        return view('client.pages.watch', compact('movie'));
     }
     public function watchTrailer($slug)
     {
@@ -87,7 +91,7 @@ class IndexController extends Controller
         if ($categoryId) {
             $query->where('category_id', $categoryId);
         }
-        $movieFilterList = $query->get();
+        $movieFilterList = $query->paginate(20);
         return view('client.pages.filter', compact('movieFilterList'));
     }
 }

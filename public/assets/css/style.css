@@ -57,6 +57,11 @@
  */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap");
 :root {
+    --main-color: #ffb43a;
+    --hover-color: hsl(37, 94%, 57%);
+    --body-color: #1e1e2a;
+    --container-color: #2d2e37;
+    --text-color: #fcfeff;
     --bs-blue: #0D6EFD;
     --bs-indigo: #6610F2;
     --bs-purple: #6F42C1;
@@ -81,6 +86,7 @@
     --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+
 }
 
 *,
@@ -95,8 +101,8 @@ body {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.56;
-    color: #777;
-    background-color: #FFF;
+    color: #fcfeff;
+    background-color: #1e1e2a;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -116,6 +122,9 @@ hr {
 hr:not([size]) {
     height: 1px;
 }
+img {
+    cursor:pointer;
+}
 
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     margin-top: 0;
@@ -123,12 +132,67 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     font-family: "Open Sans", sans-serif;
     font-weight: 500;
     line-height: 1.2;
-    color: #24262b;
+    color: var(--text-color);
 }
 
 h1, .h1 {
     font-size: calc(1.34375rem + 1.125vw);
 }
+.about-top {
+    position: relative;
+}
+
+.about-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    mix-blend-mode: multiply; /* Adjust blending mode as needed */
+}
+.btn-large {
+    padding: 15px 30px; /* Adjust padding as needed */
+    font-size: 20px; /* Adjust font size as needed */
+    background: var(--main-color);
+  }
+  /* CSS */
+.button-63 {
+    align-items: center;
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 19px 24px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  
+  .button-63:active,
+  .button-63:hover {
+    outline: 0;
+  }
+  
+  @media (min-width: 768px) {
+    .button-63 {
+      font-size: 24px;
+      min-width: 196px;
+    }
+  }
 @media (min-width: 1200px) {
     h1, .h1 {
         font-size: 2.1875rem;
@@ -466,7 +530,6 @@ legend + * {
 ::-webkit-color-swatch-wrapper {
     padding: 0;
 }
-
 ::-webkit-file-upload-button {
     font: inherit;
     -webkit-appearance: button;
@@ -503,6 +566,7 @@ progress {
     font-weight: 300;
     line-height: 1.2;
 }
+
 @media (min-width: 1200px) {
     .display-1 {
         font-size: 5rem;
@@ -4711,11 +4775,11 @@ progress {
 .page-link {
     position: relative;
     display: block;
-    color: #0D6EFD;
+    color: #fff;
     text-decoration: none;
-    background-color: #FFF;
-    border: 1px solid #DEE2E6;
+    border: 1px solid #fff;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin: 0 2px;
 }
 @media (prefers-reduced-motion: reduce) {
     .page-link {
@@ -4724,9 +4788,9 @@ progress {
 }
 .page-link:hover {
     z-index: 2;
-    color: #024dbc;
-    background-color: #E9ECEF;
-    border-color: #DEE2E6;
+    color: black;
+    background-color: #dcdcd9;
+    border-color: white;
 }
 .page-link:focus {
     z-index: 3;
@@ -4741,9 +4805,9 @@ progress {
 }
 .page-item.active .page-link {
     z-index: 3;
-    color: #FFF;
-    background-color: #0D6EFD;
-    border-color: #0D6EFD;
+    color: black;
+    background-color: #fff;
+    border-color: #04ff2b;
 }
 .page-item.disabled .page-link {
     color: #6C757D;
@@ -14258,6 +14322,9 @@ progress {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 html,
 body {
     height: 100%;
@@ -14302,6 +14369,7 @@ a {
     text-decoration: none;
     transition: all 0.5s ease;
     outline: none;
+    cursor:pointer;
 }
 a:hover {
     color: #b19361;
@@ -14426,6 +14494,7 @@ input {
 
 .img-responsive img {
     width: 100%;
+    cursor:pointer;
 }
 
 .pos-relitive {
@@ -14615,6 +14684,46 @@ input {
 .hero-single-slider-item.swiper-slide-active .hero-slider-content a {
     animation: fadeInUp 1s ease 1.5s 1 backwards;
 }
+.image-box {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay:hover {
+    opacity: 1;
+}
+
+.play-btn {
+    color: #fff;
+    font-size: 48px;
+}
+
+
+
 
 .hero-slider-bg img {
     width: 100%;
@@ -15434,6 +15543,21 @@ input {
     padding: 0 10px;
     color: #FFF;
 }
+.banner-single-item .action-link {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    background: black;
+    line-height: 60px;
+    padding: 0 20px;
+    opacity: .8;
+    transform: translateY(0);
+    
+
+}
 .product-default-single-item .action-link {
     position: absolute;
     bottom: 0;
@@ -15449,6 +15573,39 @@ input {
     transition: all 0.5s ease;
     transform: translateY(60px);
 }
+.banner-single-item .action-link-left a {
+    font-weight: 700;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.banner-single-item .action-link-right a {
+    font-size: 18px;
+    color: #FFF;
+    margin-right: 15px;
+}
+.banner-single-item .action-link-right a:last-child {
+    margin-right: 0;
+}
+.banner-single-item .content {
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.banner-single-item .content-left .title {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.banner-single-item .content-left .title a {
+    color: #fff;
+}
+.banner-single-item .content-right .price del {
+    padding-right: 10px;
+}
+
 .product-default-single-item .action-link-left a {
     font-weight: 700;
     color: #FFF;
@@ -15475,7 +15632,7 @@ input {
     text-transform: uppercase;
 }
 .product-default-single-item .content-left .title a {
-    color: #24262b;
+    color: #fff;
 }
 .product-default-single-item .content-right .price del {
     padding-right: 10px;
@@ -18018,7 +18175,7 @@ Pages - Contact
 }
 
 .header-bottom-color--golden {
-    background: #051622;
+    background: #1e1e2a;
 }
 .header-bottom-color--white {
     background: #FFF;
@@ -18123,7 +18280,7 @@ Pages - Contact
     position: absolute;
     min-width: 100%;
     padding: 25px 30px 30px 30px;
-    background: #FFF;
+    background: #151814;
     box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
     transform: perspective(600px) rotateX(-90deg);
     transform-origin: 0 0 0;
@@ -18175,11 +18332,11 @@ Pages - Contact
 
 /*Main Menu Link Normal Color*/
 .menu-color--black nav > ul > li > a {
-    color: #24262b;
+    color: var(--text-color);
 }
 .menu-color--black .sub-menu > li > a,
 .menu-color--black .mega-menu-sub > li > a {
-    color: #24262b;
+    
 }
 .menu-color--black .mega-menu-item-title {
     color: #24262b;
@@ -18238,12 +18395,18 @@ Pages - Contact
 }
 
 .header-logo .logo {
-    width: 100px;
+    font-size: 1.4rem;
+    color: var(--text-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 auto 0 0;
 }
-.header-logo .logo img {
-    width: 100%;
-    height: auto;
+
+.logo span {
+    color: #ffb43a;
 }
+
+
 
 .header-action-link {
     display: flex;
