@@ -8,13 +8,13 @@ use App\Models\Country;
 use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateMoviesJob implements ShouldQueue
 {
@@ -31,9 +31,9 @@ class UpdateMoviesJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $totalPages = 1078; // Total number of pages
+        $totalPages = 1086; // Total number of pages
 
-        for ($page = 1060; $page <= $totalPages; $page++) {
+        for ($page = 407; $page <= $totalPages; $page++) {
             try {
                 $response = Http::get('https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=' . $page);
                 $movies = $response->json()["items"];
@@ -71,6 +71,10 @@ class UpdateMoviesJob implements ShouldQueue
     private function processMovie($movieData)
     {
         try {
+            $thumbPath = $this->downloadImage($movieData['movie']['thumb_url']);
+            $posterPath = $this->downloadImage($movieData['movie']['poster_url']);
+            $movieData['movie']['thumb_url'] = $thumbPath;
+            $movieData['movie']['poster_url'] = $posterPath;
             $newMovie = $this->createOrUpdateMovie($movieData['movie']);
             $this->processActors($movieData['movie']['actor'], $newMovie);
             $this->processGenres($movieData['movie']['category'], $newMovie);
@@ -85,11 +89,15 @@ class UpdateMoviesJob implements ShouldQueue
     private function createOrUpdateMovie($movieData)
     {
         $category_id = Category::firstOrCreate(['name' => $movieData['type'], 'status' => 1])->id;
+        $cleanedContent = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
+            return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
+        }, $movieData['content']);
         return Movie::create([
+
             'name' => $movieData['name'],
             'o_phim_id' => $movieData['_id'],
             'origin_name' => $movieData['origin_name'],
-            'content' => strip_tags($movieData['content']),
+            'content' => $cleanedContent,
             'slug' => $movieData['slug'],
             'status' =>  1,
             'thumb' => $movieData['thumb_url'],
@@ -149,5 +157,31 @@ class UpdateMoviesJob implements ShouldQueue
         $linkM3u8 = rtrim($linkM3u8);
 
         $movie->update(['link_stream' => $linkStream, 'link_m3u8' => $linkM3u8]);
+    }
+    private function downloadImage($url)
+    {
+
+        try {
+            // Get the image content from the URL
+            $client = new \GuzzleHttp\Client();
+            $response = $client->get($url, [
+                'headers' => ['User-Agent' => env('APP_NAME', 'Laravel')],
+                'timeout' => 10,
+            ]);
+            $imageContent = $response->getBody()->getContents();
+            $filenameWithoutExt = pathinfo($url, PATHINFO_FILENAME);
+            $path = 'images/' . uniqid() . '_' . $filenameWithoutExt . '.webp';
+            Storage::disk('public')->put($path, $imageContent);
+            return $path;
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            if ($e->hasResponse()) {
+                $statusCode = $e->getResponse()->getStatusCode();
+                Log::error("Error downloading image from {$url}: Status code: {$statusCode}");
+                return null;
+            } else {
+                Log::error("Error downloading image from {$url}: {$e->getMessage()}");
+                return  null;
+            }
+        }
     }
 }

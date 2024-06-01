@@ -13,7 +13,7 @@ class Movie extends Model
     public $timestamps = false;
     protected $fillable = [
         'name', 'description', 'thumb', 'category_id', 'active', 'status', 'poster', 'link_trailer', 'link_stream', 'slug', 'origin_name', 'o_phim_id', 'link_m3u8', 'link_server_2',
-        'link_server_3', 'link_server_4', 'link_server_5'
+        'link_server_3', 'link_server_4', 'link_server_5', 'content'
     ];
 
     public function category()
