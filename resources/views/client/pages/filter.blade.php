@@ -68,7 +68,7 @@
 <div class="image-box">
     <a href="{{route('info', $movie->slug)}}" class="image-link">
         <div class="image-container">
-            {{-- <img src="{{$movie->thumb}}" style="height: 400px" class="img-responsive" alt=""> --}}
+            <img src="{{asset('storage/'. $movie->thumb )}}" style="height: 400px" class="img-responsive" alt="{{$movie->slug}}">
             <div class="overlay">
                 <div class="play-btn">
                     <i class="fa fa-play"></i>
@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mt-8">
     <div class="next-page">
         {{ $movieFilterList->links('vendor.pagination.bootstrap-4') }}
     </div>

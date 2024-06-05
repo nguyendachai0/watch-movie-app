@@ -1,56 +1,5 @@
 @extends('client.layouts.layout')
  @section('content')
-{{-- <section class="home container" id="home">
-    <img src="{{asset('img/home-background.png')}}" alt="" class="home-img">
-    <div class="home-text">
-        <h1 class="home-title"></h1>
-        <p>Xem hoặc nhận một viên kẹo đồng</p>
-        <a href="" class="watch-btn">
-            <i class="bx bx-right-arrow"></i>
-            <span>Watch movie</span>
-        </a>
-    </div>
-    
-
-</section> 
-
-
-@foreach( $categories as $category)
-<section class="movies container" id="movies">
-    <div class="heading">
-        <h2 class="heading-title">
-            {{$category->name}}
-        </h2>
-    </div>
-    <div class="movies-content">
-        @foreach($category->movie->take(8) as $mov )
-        <div class="movie-box" onclick="redirectToWatch('{{ route('watch', $mov->slug) }}')">           
-            <img src="{{$mov->thumb}}" alt="" class="movie-box-img">
-            <div class="box-text">
-                <h2 class="movie-title">{{$mov->name}}</h2>
-                @if(isset($mov->genres))
-                @foreach($mov->genres as $genre)
-    <span class="movie-type">{{ $genre->name }}</span>
-@endforeach
-@endif
-                <a href="{{route('watch', $mov->slug)}}" class="watch-btn play-btn">
-                    <i class="bx bx-right-arrow"></i>
-                </a>
-            </div>
-        </div>
-        @endforeach
-    </div>
-    </div>
-</section>   --}}
-{{-- @endforeach --}}
-
-
-    
-
-  
-
-   
-
     @foreach($category_home as $category)
     <!-- Start Product Default Slider Section -->
     @if($category->name == 'TV Show')
@@ -58,19 +7,32 @@
      <div class="banner-section section-top-gap-100 section-fluid">
         <div class="banner-wrapper">
             <div class="container-fluid">
-                <div class="row mb-n6">
+                <div class="section-content-gap">
+                    <div class="secton-content">
+                        <h3 class="section-title">{{$category->name}}</h3>
+                    </div>
+                </div>
+                <div class="row mb-6">
                    
                   
                     <div class="col-lg-6 col-12 mb-6">
-                        <!-- Start Banner Single Item -->
-                        <div class="banner-single-item banner-style-1 banner-animation img-responsive"
-                            data-aos="fade-up" data-aos-delay="0">
+                        
+                        <div class="banner-single-item banner-style-1  img-responsive">
+                           
                             <div class="image">
-                                <img src="{{$category->movies[0]->thumb}}" alt="">
+                                <a href="{{route('info', $category->movies[0]->slug)}}" class="image-link">
+                                <img src="{{asset('storage/'.$category->movies[0]->thumb)}}" alt="">
+                                <div class="overlay">
+                                    <div class="play-btn">
+                                        <i class="fa fa-play"></i>
+                                    </div>
+                                </div>
+                                </a>
                             </div>
+                           
                             <div class="action-link">
                                 <div class="action-link-left">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">{{$category->movies[0]->name}}</a>
+                                    <a href="{{route('info', $category->movies[0]->slug)}}">{{$category->movies[0]->name}}</a>
                                 </div>
                                 
                             </div>
@@ -84,13 +46,20 @@
                             @foreach($category->movies->take(5) as $key => $movie)
                             @if($key != 0)
                             <div class="col-lg-6 col-sm-6 mb-6">
-                                <div class="banner-single-item banner-style-2 banner-animation">
+                                <div class="banner-single-item banner-style-2 ">
+                                    <a href="{{route('info', $movie->slug)}}" class="image-link">
                                     <div class="image">
-                                        <img src="{{$movie->thumb}}" alt="" style="height: 372.17px" class="img-fluid img-responsive"> <!-- Bootstrap class img-fluid for responsiveness -->
+                                        <img src="{{asset('storage/'. $movie->thumb )}}" alt="" style="height: 372.17px" class="img-fluid img-responsive"> <!-- Bootstrap class img-fluid for responsiveness -->
+                                        <div class="overlay">
+                                            <div class="play-btn">
+                                                <i class="fa fa-play"></i>
+                                            </div>
+                                        </div>
                                     </div>
+                                </a>
                                     <div class="action-link">
                                         <div class="action-link-left">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">{{$movie->name}}</a>
+                                            <a href="{{route('info', $movie->slug)}}" data-bs-toggle="modal" data-bs-target="#modalAddcart">{{$movie->name}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +108,7 @@
     <div class="image-box">
         <a href="{{route('info', $movie->slug)}}" class="image-link">
             <div class="image-container">
-                <img src="{{$movie->thumb}}" style="height: 400px" class="img-responsive" alt="">
+                <img src="{{asset('storage/'. $movie->thumb)}}" style="height: 400px" class="img-responsive" alt="">
                 <div class="overlay">
                     <div class="play-btn">
                         <i class="fa fa-play"></i>
@@ -150,7 +119,7 @@
     </div>
     <div class="content">
         <div class="content-left">
-            <h6 class="title"><a href="product-details-default.html">{{$movie->name}}</a></h6>
+            <h6 class="title"><a href="{{route('info', $movie->slug)}}">{{$movie->name}}</a></h6>
         </div>
     </div>
 </div>

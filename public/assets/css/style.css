@@ -1,53 +1,4 @@
 @charset "UTF-8";
-
-
------------------------------------------------------------------------------------
-
-    CSS INDEX
-    ===================
-
-    -> Base - Default
-
-    -> Components - Button
-    -> Components - Hero
-    -> Components - Service Promo
-    -> Components - Banner
-    -> Components - Product
-    -> Components - Blog Feed
-    -> Components - Instagram
-    -> Components - Company Logo
-    -> Components - Slider Customize
-    -> Components - Tab Style
-    -> Components - Form
-    -> Components - Sidebar Widget
-    -> Components - Breadcrumb
-    -> Components - Pagination
-    -> Components - Comment
-    -> Components - Table
-
-    -> Pages - Shop
-    -> Pages - Product Details
-    -> Pages - Cart
-    -> Pages - Compare
-    -> Pages - Checkout
-    -> Pages - Login
-    -> Pages - My Account
-    -> Pages - FAQ
-    -> Pages - Privacy Policy
-    -> Pages - 404 
-    -> Pages - About
-    -> Pages - Contact
-    -> Pages - Blog
-    -> Pages - Empty Cart
-
-    -> Layout - Header
-    -> Layout - Header Mobile
-    -> Layout - Footer
-    -> Layout - Offcanvas
-    -> Layout - Modal
-
-
------------------------------------------------------------------------------------*/
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&amp;display=swap");
 /*!
  * Bootstrap v5.0.0-alpha2 (https://getbootstrap.com/)
@@ -57,6 +8,10 @@
  */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap");
 :root {
+    --milk: #FDFFE2;
+    --blue: #83B4FF;
+    --navy: #5A72A0;
+    --black: #1A2130;
     --main-color: #ffb43a;
     --hover-color: hsl(37, 94%, 57%);
     --body-color: #1e1e2a;
@@ -132,7 +87,7 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     font-family: "Open Sans", sans-serif;
     font-weight: 500;
     line-height: 1.2;
-    color: var(--text-color);
+    color: var(--text-color, #fcfeff);
 }
 
 h1, .h1 {
@@ -186,6 +141,9 @@ h1, .h1 {
   .button-63:hover {
     outline: 0;
   }
+  .about-img {
+    margin-top:2em;
+  }
   
   @media (min-width: 768px) {
     .button-63 {
@@ -237,6 +195,7 @@ h6, .h6 {
 p {
     margin-top: 0;
     margin-bottom: 16px;
+    text-align: justify;
 }
 
 abbr[title],
@@ -566,6 +525,11 @@ progress {
     font-weight: 300;
     line-height: 1.2;
 }
+.search-box {
+    background: var(--milk);
+    border-radius: 10px;
+    padding: .6rem 0;
+}
 
 @media (min-width: 1200px) {
     .display-1 {
@@ -735,6 +699,11 @@ progress {
     .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
         max-width: 1440px;
     }
+}
+#list-search-movie {
+    background-color: var(--navy);
+    color: var(--text-color);
+    margin-top: .1rem;
 }
 .row {
     --bs-gutter-x: 1.875rem;
@@ -3353,7 +3322,6 @@ progress {
 }
 
 .btn-secondary {
-    color: #FFF;
     background-color: #6C757D;
     border-color: #6C757D;
 }
@@ -14494,7 +14462,6 @@ input {
 
 .img-responsive img {
     width: 100%;
-    cursor:pointer;
 }
 
 .pos-relitive {
@@ -14552,7 +14519,7 @@ input {
 ************************/
 .btn {
     outline: none;
-    color: #24262b;
+    color: #fff;
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 700;
@@ -14698,6 +14665,10 @@ input {
     height: auto;
     transition: transform 0.3s ease;
 }
+.image-link:hover img {
+    transform: scale(1.1); /* Increase size by 10% on hover */
+    transition: transform 0.2s ease-in-out; /* Add smooth transition */
+  }
 
 .overlay {
     position: absolute;
@@ -14883,13 +14854,14 @@ input {
 ************************/
 .banner-single-item {
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .banner-single-item .image-link {
     display: block;
 }
 .banner-single-item .image {
     text-align: center;
+    overflow: hidden;
 }
 .banner-single-item .content {
     position: absolute;
@@ -15544,14 +15516,17 @@ input {
     color: #FFF;
 }
 .banner-single-item .action-link {
+    text-align:center;
+    z-index:100;
     position: absolute;
     bottom: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items:center;
     height: 60px;
     background: black;
-    line-height: 60px;
+    line-height: 1.5rem;
     padding: 0 20px;
     opacity: .8;
     transform: translateY(0);
@@ -15623,8 +15598,9 @@ input {
 .product-default-single-item .content {
     padding-top: 25px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-end;
+    text-align: center;
 }
 .product-default-single-item .content-left .title {
     font-size: 16px;
@@ -16256,7 +16232,7 @@ input {
     height: 40px;
     width: 100%;
     padding: 0 20px;
-    color: #777;
+    color: #fcfeff;
     outline: none;
 }
 .default-form-box input[type=text]::placeholder,
@@ -16273,7 +16249,8 @@ input {
 .default-form-box input[type=number]:focus,
 .default-form-box input[type=date]:focus,
 .default-form-box textarea:focus {
-    border-color: #b19361;
+    border-color: #83B4FF;
+    color: #83B4FF;
 }
 .default-form-box textarea {
     height: 200px;
@@ -17540,11 +17517,14 @@ table {
     font-weight: 500;
     line-height: 22px;
     margin-bottom: 30px;
+    color: var(--text-color, #fcfeff);
 }
 .account_form form {
-    border: 1px solid #ededed;
+    border: 1px solid;
+    border-color: #fff;
     padding: 23px 20px 29px;
     border-radius: 5px;
+    color: var(--text-color, #fcfeff);
 }
 
 .login_submit * {
@@ -18945,6 +18925,8 @@ Pages - Contact
 .mobile-contact-info .logo {
     margin: 0 auto;
     width: 100px;
+    font-size: large;
+    font-weight:bold;
 }
 .mobile-contact-info .logo img {
     width: 100%;

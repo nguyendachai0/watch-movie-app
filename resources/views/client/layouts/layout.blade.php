@@ -12,10 +12,10 @@
     <link rel="icon" type="image/svg+xml" href="{{asset('assets/logo.svg')}}">
     {{-- <link rel="stylesheet" href="{{asset('css/style.client.css')}}"> --}}
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/vendor.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/plugins.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/lozad@1.14.0/dist/lozad.min.js"></script>
 </head>
 

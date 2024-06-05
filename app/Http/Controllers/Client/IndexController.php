@@ -81,13 +81,15 @@ class IndexController extends Controller
         $categoryId = $request->input('category_id');
         $query = Movie::query();
         if ($countryId) {
-            $query->where('country_id', $countryId);
+            $query->whereHas('countries', function ($query) use ($countryId) {
+                $query->where('country_id', $countryId);
+            });
         }
-
         if ($genreId) {
-            $query->where('genre_id', $genreId);
+            $query->whereHas('genres', function ($query) use ($genreId) {
+                $query->where('genre_id', $genreId);
+            });
         }
-
         if ($categoryId) {
             $query->where('category_id', $categoryId);
         }

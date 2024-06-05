@@ -31,9 +31,9 @@ class UpdateMoviesJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $totalPages = 1086; // Total number of pages
+        $totalPages = 2; // Total number of pages
 
-        for ($page = 407; $page <= $totalPages; $page++) {
+        for ($page = 1; $page <= $totalPages; $page++) {
             try {
                 $response = Http::get('https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=' . $page);
                 $movies = $response->json()["items"];
