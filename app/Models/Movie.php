@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
-class Movie extends Model
+class Movie extends Model implements Sitemapable
 {
     use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use HasFactory;
@@ -68,5 +71,12 @@ class Movie extends Model
     private function changeDomainThumbAndPoster($value)
     {
         return str_replace('15.cc', '.live', $value);
+    }
+    public function toSitemapTag(): Url | string | array
+    {
+        return Url::create(route('watch', $this))
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+            ->setPriority(0.1);
     }
 }
